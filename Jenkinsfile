@@ -2,15 +2,15 @@ pipeline {
     agent any
 
     environment {
-        MODEL_NAME = "my-ml-model"
-        DOCKER_IMAGE = "myregistry.com/ml-model:${BUILD_NUMBER}"
+        MODEL_NAME = "model"
+        DOCKER_IMAGE = "edaraanand/proj-1:${BUILD_NUMBER}"
         DOCKER_CREDENTIALS_ID = "docker-credentials"
     }
 
     stages {
         stage('Checkout Code') {
             steps {
-                git url: 'https://github.com/your-org/ml-project.git', branch: 'main'
+                git url: 'git@github.com:edaraanand/proj-1.git', branch: 'master'
             }
         }
 
@@ -56,7 +56,7 @@ pipeline {
         stage('Push Docker Image') {
             steps {
                 script {
-                    docker.withRegistry('https://myregistry.com', "${DOCKER_CREDENTIALS_ID}") {
+                    docker.withRegistry('https://hub.docker.com', "${DOCKER_CREDENTIALS_ID}") {
                         docker.image("${DOCKER_IMAGE}").push()
                     }
                 }

@@ -9,7 +9,7 @@ y = df['target']
 
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 
-model = joblib.load('models/model.pkl')
+model = joblib.load('models/model-1.pkl')
 predictions = model.predict(X_test)
 classification_report = classification_report(y_test, predictions)
 accuracy = accuracy_score(y_test, predictions)
