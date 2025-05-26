@@ -10,4 +10,3 @@ which python
 python -m site
 
 conda create --name mlops python=3.11
-

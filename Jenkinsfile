@@ -1,5 +1,14 @@
 pipeline {
-    agent any
+    // agent any
+
+    // agent { label 'python-agent' }
+
+    agent {
+        docker {
+            image 'python:3.10'  // Official Python image from Docker Hub
+            args '-u root'       // Run as root if needed
+        }
+    }
 
     environment {
         MODEL_NAME = "model"
@@ -14,6 +23,13 @@ pipeline {
             }
         }
 
+        stage('Check Python') {
+            steps {
+                sh 'python --version'
+                sh 'python3 -m venv venv'
+            }
+        }
+    
         stage('Setup Environment') {
             steps {
                 sh 'python3 -m venv venv'
